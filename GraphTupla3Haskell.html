@@ -21,3 +21,25 @@
 </textarea>
 
 <script>
+
+var parser, xmlDoc;
+
+parser = new DOMParser();
+function processGraphsXML(){
+  xmlDoc = parser.parseFromString(document.getElementById("show_input").value,"text/xml");
+
+  var allNames = xmlDoc.getElementsByTagName("node");
+  var allPaths = xmlDoc.getElementsByTagName("edge");
+  document.getElementById("show_result").value = "[";
+  for(i = 0; i < allPaths.length; i++){
+      document.getElementById("show_result").value = document.getElementById("show_result").value + '("' + allNames[parseInt(allPaths[i].getAttribute("source"))].getAttribute("mainText") + '", "' + allNames[parseInt(allPaths[i].getAttribute("target"))].getAttribute("mainText") + '", ' + allPaths[i].getAttribute("weight") + ".0)";
+      if(i < allPaths.length - 1){
+          document.getElementById("show_result").value = document.getElementById("show_result").value + ","
+      }
+  }
+  document.getElementById("show_result").value = document.getElementById("show_result").value + "]";
+  }
+</script>
+
+</body>
+</html>

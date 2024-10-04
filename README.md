@@ -11,35 +11,5 @@
 <p></p>
 <p>Nota: Solo funciona para grafos dirigidos</p>
 <br>
-<p>Codigo XML</p>
-<textarea id="show_input" name="input" rows="4" cols="50">
-</textarea>
-</p><button onclick="processGraphsXML()">Procesar</button> </p>
-<br>
-<p>Tupla triple de Haskell</p>
-<textarea id="show_result" name="output" rows="4" cols="50">
-</textarea>
-
-<script>
-
-var parser, xmlDoc;
-
-parser = new DOMParser();
-function processGraphsXML(){
-  xmlDoc = parser.parseFromString(document.getElementById("show_input").value,"text/xml");
-
-  var allNames = xmlDoc.getElementsByTagName("node");
-  var allPaths = xmlDoc.getElementsByTagName("edge");
-  document.getElementById("show_result").value = "[";
-  for(i = 0; i < allPaths.length; i++){
-      document.getElementById("show_result").value = document.getElementById("show_result").value + '("' + allNames[parseInt(allPaths[i].getAttribute("source"))].getAttribute("mainText") + '", "' + allNames[parseInt(allPaths[i].getAttribute("target"))].getAttribute("mainText") + '", ' + allPaths[i].getAttribute("weight") + ".0)";
-      if(i < allPaths.length - 1){
-          document.getElementById("show_result").value = document.getElementById("show_result").value + ","
-      }
-  }
-  document.getElementById("show_result").value = document.getElementById("show_result").value + "]";
-  }
-</script>
-
 </body>
 </html>
